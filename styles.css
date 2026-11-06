@@ -1,0 +1,314 @@
+/* PASOS 1 y 2: RESET, BASE Y VARIABLES EN :ROOT */
+*, *::before, *::after {
+  box-sizing: border-box; /* padding dentro del ancho */
+  margin: 0;             /* 4 lados iguales */
+  padding: 0;
+}
+
+html {
+  font-size: 100%; /* Base accesible del navegador (16px) */
+}
+
+:root {
+  /* Escala HSL del proyecto */
+  --primario-900: #371010;
+  --primario-700: #633D21; /* Base */
+  --primario-500: #9B633B;
+  --primario-300: #CEA37E;
+  --primario-100: #F2E6D9;
+  
+  /* Roles de paleta */
+  --secundario:   #326744; 
+  --acento:       #F4AF25;
+  --fondo:        #F9F6F0;
+  --texto:        #292019;
+
+  /* Detalles fijos en px */
+  --radio:  8px;
+  --sombra: 0 4px 12px rgba(55, 32, 16, 0.15);
+
+  /* Escala de espaciados globales en rem */
+  --espacio-s:  1rem;
+  --espacio-m:  1.5rem;
+  --espacio-xl: 4rem;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.6; /* Sin unidad: factor relativo */
+  color: var(--texto);
+  background-color: var(--fondo);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* paso 3: contenedor  centrado */
+.contenedor {
+  width: 90%;         /* % -> fluido para móviles */
+  max-width: 1100px;  /* px -> tope máximo en escritorio */
+  margin: 0 auto;     /* shorthand: centrado horizontal */
+}
+
+/* paso 4: tipografia y header */
+h1 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 1rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+.header {
+  background-color: var(--primario-700);
+  border-bottom: 4px solid var(--acento);
+  color: #ffffff;
+}
+
+.header__nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--espacio-s) 0;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.nav__enlace {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.25em 0.5em; /* em -> escala según el tamaño de la letra */
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.nav__enlace:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* paso 6 */
+.hero {
+  background: linear-gradient(135deg, rgba(55, 32, 16, 0.92), rgba(50, 103, 68, 0.85)), #372010;
+  text-align: center;
+  padding: var(--espacio-xl) 0;
+  color: #ffffff;
+}
+
+.hero__contenido {
+  max-width: 45em; /* em -> ancho de línea proporcional al texto */
+}
+
+.hero p {
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.hero__botones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* paso 8: botones  */
+.btn {
+  font-size: 1rem;
+  padding: 0.75em 1.5em; /* em -> sigue a la letra */
+  border-radius: 0.5em;  /* em -> radio proporcional */
+  border: 2px solid var(--primario-700);
+  background-color: var(--acento);
+  color: var(--primario-900);
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Hover genérico de elevación para botones */
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #e09e1f;
+}
+
+.btn--grande { font-size: 1.25rem; }
+.btn--grande:hover { transform: translateY(-4px) scale(1.03); }
+
+.btn--pequeno { font-size: 0.875rem; }
+
+.btn--secundario {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.btn--secundario:hover {
+  background-color: #ffffff;
+  color: var(--primario-900);
+}
+
+/* Hover específico para botones Comprar dentro de tarjetas */
+.tarjeta .btn:hover {
+  background-color: var(--primario-700);
+  color: #ffffff;
+  border-color: var(--primario-700);
+}
+
+/*hover y tarjetas de productos */
+.seccion {
+  padding: var(--espacio-xl) 0;
+}
+
+.seccion__titulo {
+  text-align: center;
+  margin-bottom: var(--espacio-m);
+}
+
+.seccion__subtitulo {
+  text-align: center;
+  max-width: 40em;
+  margin: 0 auto var(--espacio-m) auto;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%; /* Hueco fluido en % */
+}
+
+.tarjeta {
+  width: 32%; /* 3 columnas en escritorio */
+  border: 1px solid var(--primario-300); /* 1px fijo */
+  border-radius: var(--radio);           /* 8px */
+  box-shadow: var(--sombra);
+  background-color: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* hover de animacion */
+.tarjeta:hover {
+  transform: translateY(-25px); /* mueve la tarjeta hacia arriba (abajo si fuera pos) */
+  box-shadow: 0 12px 24px rgba(55, 32, 16, 0.25);
+  border-color: var(--acento);
+}
+
+.tarjeta__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;/* Ajusta la imagen sin deformar */
+  background-color: var(--primario-100);
+}
+
+.tarjeta__cuerpo {
+  padding: var(--espacio-m);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.tarjeta__precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--secundario);
+  margin: 0.5rem 0 1rem 0;
+}
+
+.tarjeta .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* paso 9: paleta difuminacion y hover de animacion */
+.paleta-grilla {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.paleta-item {
+  text-align: center;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* 1. Al pasar el mouse en el contenedor, se difuminan todos */
+.paleta-grilla:hover .paleta-item {
+  filter: blur(4px);
+  opacity: 0.4;
+  transform: scale(0.9);
+}
+
+/* 2. El ítem seleccionado se agranda y se enfoca */
+.paleta-grilla .paleta-item:hover {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1.25);
+  z-index: 2;
+}
+
+.muestra_color {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%; /* 50% = Círculo perfecto */
+  margin: 0 auto 0.5rem auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: var(--sombra);
+  transition: box-shadow 0.3s ease;
+}
+
+.paleta-item:hover .muestra_color {
+  box-shadow: 0 8px 16px rgba(55, 32, 16, 0.3);
+}
+
+.muestra--p900 { background-color: var(--primario-900); }
+.muestra--p700 { background-color: var(--primario-700); }
+.muestra--p500 { background-color: var(--primario-500); }
+.muestra--p300 { background-color: var(--primario-300); }
+.muestra--p100 { background-color: var(--primario-100); }
+.muestra--secundario { background-color: var(--secundario); }
+.muestra--acento { background-color: var(--acento); }
+
+.paleta-item__nombre {
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.paleta-item__hex {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* query */
+.footer {
+  background-color: var(--primario-900);
+  color: #ffffff;
+  padding: var(--espacio-m) 0;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.footer__creditos {
+  opacity: 0.6;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Media Query en em (48em = 768px) */
+@media (max-width: 48em) {
+  h1 { font-size: 2rem; }
+  
+  .header__nav-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tarjeta {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .hero__botones {
+    flex-direction: column;
+  }
+}
